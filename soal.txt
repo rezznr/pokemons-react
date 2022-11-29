@@ -1,0 +1,15 @@
+1. Buat 1 file component Chosen.jsx, isi dengan div terluar dengan id chosen-one
+2. Buat 1 file component PokemonList.jsx isi dengan div terluar dengan id pokemon-list
+
+3. Buat 1 file component Others.jsx dan isi dengan component lain minimal 4 component reusable
+4. Buat 1 file page.jsx & gunakan data pokemon.js untuk merender gabungan component2 1-3
+5. Import Page.jsx ke dalam App.js
+
+6. Tambahkan onClick event dan ganti chosen-one dengan hasil pilihan
+7. Fetch ke https://pokeapi.co/api/v2/pokemon
+8. Dapat informasi url lalu fetch berdasarkan url masing2 pokemon
+9. Dapatkan informasi imageUrl dari sprites.other.dream_world.front_default, name dari name
+10. Masukan ke dalam array pokemons dan ganti hasil render pokemon dengan menggunakan hasil dari fetch (array pokemons)
+11. BONUS: Tambahkan button load more dan update array pokemons
+
+https://leafyglossybug.kobarseptyanus1.repl.co/webapi/
