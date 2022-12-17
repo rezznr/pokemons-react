@@ -10,16 +10,16 @@ const Pages = () => {
   const [data, setData] = useState([])
   const navigate = useNavigate()
 
-  const fetchPokemon = async (url) => {
-    const responseAbility = await fetch(url)
-    const resultAbility = await responseAbility.json()
-    return resultAbility
-  }
-
   const pokemonFetch = async () => {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon")
     const data = await response.json()
     const urls = data.results.map(el => el.url)
+
+    const fetchPokemon = async (url) => {
+      const responseAbility = await fetch(url)
+      const resultAbility = await responseAbility.json()
+      return resultAbility
+    }
     const fetchArray = urls.map(fetchPokemon)
     const pokemonData = await Promise.all(fetchArray)
     const pokemons = pokemonData.map(el => ({
