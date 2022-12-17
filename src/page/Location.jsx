@@ -30,7 +30,7 @@ const Location = () => {
     }
 
     useEffect(() => {
-        loc(`https://pokeapi.co/api/v2/location-area`)
+        loc(`https://pokeapi.co/api/v2/location-area`);
     }, [])
 
     return (
@@ -43,7 +43,6 @@ const Location = () => {
                     return (
                         <PokemonOthers key={idx}>
                             <NameP nama={el.name} />
-                            {/* <Image src={el.imageUrl} /> */}
                             <Link to={"/location/" + (idx + 1)}><ButtonLocation /></Link>
                         </PokemonOthers>
                     )
