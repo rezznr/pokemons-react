@@ -8,6 +8,23 @@ export const Button = ({ onClick }) => {
   );
 };
 
+
+export const ButtonToLocation = ({ onClick }) => {
+  return (
+    <button className="rounded bg-indigo-500 text-white p-4 w-full" onClick={onClick}>
+      Location
+    </button>
+  );
+};
+
+export const ButtonLocation = ({ onClick }) => {
+  return (
+    <button className="rounded bg-indigo-500 text-white p-4 w-full" onClick={onClick}>
+      Pilih Area
+    </button>
+  );
+};
+
 export const Image = ({ src, size }) => {
   return (
     <img src={src} alt="img" className={`my-4 mx-auto ${size === 'big' ? 'h-64' : 'h-32'}`} />

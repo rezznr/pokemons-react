@@ -1,40 +1,45 @@
-import Chosen from "./component/Chosen.jsx";
-import PokemonList from "./component/PokemonList";
-import { ContainerBody, PokemonOthers, Button, Image, NameP } from "./component/Others"
+import Chosen from "../component/Chosen.jsx";
+import PokemonList from "../component/PokemonList";
+import { ContainerBody, PokemonOthers, Button, Image, NameP, ButtonToLocation } from "../component/Others"
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 const Pages = () => {
-  const [nama, setNama] = useState("bulbasaur")
+  const [nama, setNama] = useState("Nama")
   const [img, setImg] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg")
   const [data, setData] = useState([])
+  const navigate = useNavigate()
 
   const fetchPokemon = async (url) => {
     const responseAbility = await fetch(url)
     const resultAbility = await responseAbility.json()
     return resultAbility
   }
-  
-  const PokemonFetch = async () => {
+
+  const pokemonFetch = async () => {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon")
     const data = await response.json()
     const urls = data.results.map(el => el.url)
     const fetchArray = urls.map(fetchPokemon)
     const pokemonData = await Promise.all(fetchArray)
-    const pokemons = pokemonData.map(el =>({
-      name : el.name,
-      imageUrl : el.sprites.other.dream_world.front_default
+    const pokemons = pokemonData.map(el => ({
+      name: el.name,
+      imageUrl: el.sprites.other.dream_world.front_default
     }))
     setData(pokemons)
   }
 
   useEffect(() => {
-    PokemonFetch()
+    pokemonFetch()
   }, [])
-  // console.log(data)
 
   const changes = (nama, img) => {
     setNama(nama)
     setImg(img)
+    localStorage.setItem("my-pokemon", JSON.stringify({
+      name: nama,
+      image: img
+    }));
   }
 
   return (
@@ -44,6 +49,7 @@ const Pages = () => {
         <Image size="big" src={img} />
         <NameP nama={nama} />
       </Chosen>
+      <ButtonToLocation onClick={() => navigate("/location")} />
       <PokemonList>
         {data.map((poke, idx) => {
           return (
