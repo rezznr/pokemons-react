@@ -1,6 +1,6 @@
 import Chosen from "../component/Chosen.jsx";
 import PokemonList from "../component/PokemonList";
-import { ContainerBody, PokemonOthers, Button, Image, NameP } from "../component/Others"
+import { ContainerBody, PokemonOthers, Image, NameP } from "../component/Others"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Heading, Center } from '@chakra-ui/react';
@@ -38,6 +38,10 @@ const AreaPokemons = () => {
     const changes = (nama, img) => {
         setNama(nama)
         setImg(img)
+        localStorage.setItem("enemy-pokemon", JSON.stringify({
+            name: nama,
+            image: img
+        }));
     }
 
     return (
@@ -54,10 +58,9 @@ const AreaPokemons = () => {
                 <PokemonList>
                     {data.map((poke, idx) => {
                         return (
-                            <PokemonOthers key={idx}>
+                            <PokemonOthers onClick={() => changes(poke.name, poke.imageUrl)} key={idx}>
                                 <NameP nama={poke.name} />
                                 <Image src={poke.imageUrl} />
-                                <Button onClick={() => changes(poke.name, poke.imageUrl)} />
                             </PokemonOthers>
                         )
                     })}

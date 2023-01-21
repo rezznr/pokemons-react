@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Location from "./page/Location.jsx";
 import AreaPokemons from "./page/AreaPokemons.jsx";
 import Login from "./page/Login.jsx";
+import Fight from "./page/Fight.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route index element={<Location />} />
         <Route path=":id" element={<AreaPokemons />} />
       </Route>
+      <Route path="/fight" element={<Fight />} />
     </Routes>
   );
 }

@@ -1,17 +1,8 @@
-// import { Pokemon } from './../data/pokemon';
-
-export const Button = ({ onClick }) => {
-  return (
-    <button className="rounded bg-indigo-500 text-white p-4 w-full" onClick={onClick}>
-      Pilih pokemon
-    </button>
-  );
-};
-
+import NavBar from "./Navbar";
 
 export const ButtonToLocation = ({ onClick }) => {
   return (
-    <button className="rounded bg-indigo-500 text-white p-4 w-full" onClick={onClick}>
+    <button className="rounded bg-indigo-500 text-white p-4" onClick={onClick}>
       Location
     </button>
   );
@@ -32,17 +23,22 @@ export const Image = ({ src, size }) => {
 }
 
 export const NameP = ({ nama }) => {
-  return <p className="font-bold text-xl mb-2 text-center">{nama}</p>;
+  return <p className="font-bold text-xl mb-2 text-center capitalize font-mono">{nama}</p>;
 };
 
-export const PokemonOthers = ({ children }) => {
+export const PokemonOthers = ({ children, onClick }) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg p-4">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg p-4 scale-100 hover:scale-110 ease-in-out duration-500" onClick={onClick}>
       {children}
     </div>
   )
 }
 
 export const ContainerBody = ({ children }) => {
-  return <div className="p-6">{children}</div>
+  return (
+    <div className="p-6 bg-gradient-to-l from-blue-50 to-green-100">
+      <NavBar />
+      {children}
+    </div>
+  )
 }

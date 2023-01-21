@@ -1,14 +1,12 @@
 import Chosen from "../component/Chosen.jsx";
 import PokemonList from "../component/PokemonList";
-import { ContainerBody, PokemonOthers, Button, Image, NameP, ButtonToLocation } from "../component/Others"
+import { ContainerBody, PokemonOthers, Image, NameP } from "../component/Others"
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
 
 const Pages = () => {
   const [nama, setNama] = useState("Nama")
   const [img, setImg] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg")
   const [data, setData] = useState([])
-  const navigate = useNavigate()
 
   const pokemonFetch = async () => {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon")
@@ -44,23 +42,25 @@ const Pages = () => {
 
   return (
     <ContainerBody>
-      <Chosen>
-        <h2 className="font-bold text-xl mb-2 text-center">Sang Terpilih</h2>
-        <Image size="big" src={img} />
-        <NameP nama={nama} />
-      </Chosen>
-      <ButtonToLocation onClick={() => navigate("/location")} />
-      <PokemonList>
-        {data.map((poke, idx) => {
-          return (
-            <PokemonOthers key={idx}>
-              <NameP nama={poke.name} />
-              <Image src={poke.imageUrl} />
-              <Button onClick={() => changes(poke.name, poke.imageUrl)} />
-            </PokemonOthers>
-          )
-        })}
-      </PokemonList>
+      <div className="flex">
+        <div>
+          <Chosen>
+            <h2 className="font-bold text-xl mb-2 text-center">Sang Terpilih</h2>
+            <Image size="big" src={img} />
+            <NameP nama={nama} />
+          </Chosen>
+        </div>
+        <PokemonList>
+          {data.map((poke, idx) => {
+            return (
+              <PokemonOthers onClick={() => changes(poke.name, poke.imageUrl)} key={idx}>
+                <NameP nama={poke.name} />
+                <Image src={poke.imageUrl} />
+              </PokemonOthers>
+            )
+          })}
+        </PokemonList>
+      </div>
     </ContainerBody>
   );
 };
