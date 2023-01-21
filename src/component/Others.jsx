@@ -28,4 +28,4 @@ export const PokemonOthers = ({ children }) => {
 
 export const ContainerBody = ({ children }) => {
   return <div className="p-6">{children}</div>
-}
+}   
