@@ -48,7 +48,7 @@ const AreaPokemons = () => {
         <>
             <ContainerBody>
                 <Center>
-                    <Heading as="h1">nama location</Heading>
+                    <Heading className="mb-10" as="h1">Enemy</Heading>
                 </Center>
                 <Chosen>
                     <h2 className="font-bold text-xl mb-2 text-center">Sang Terpilih</h2>

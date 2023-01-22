@@ -35,8 +35,8 @@ const NavBar = () => {
                 </ul>
                 <form>
                     <div className="flex">
-                        <input type="text" placeholder="Search..." name="search" className="w-full p-3 mr-8" />
-                        <button type="submit" className="border rounded">Search</button>
+                        <input type="text" placeholder="Search..." name="search" className="w-full p-2 mr-8" />
+                        <button type="submit" className="rounded bg-blue-300 hover:bg-blue-400 text-white font-bold p-2">Search</button>
                     </div>
                 </form>
             </nav>
