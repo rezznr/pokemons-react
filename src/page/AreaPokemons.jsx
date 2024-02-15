@@ -6,8 +6,8 @@ import { useEffect, useState } from "react"
 import { Heading, Center } from '@chakra-ui/react';
 
 const AreaPokemons = () => {
-    const [nama, setNama] = useState("bulbasaur")
-    const [img, setImg] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg")
+    const [nama, setNama] = useState("Enemy Pokemon")
+    const [img, setImg] = useState("/images/wheresPokemon.png")
     const [data, setData] = useState([])
     const { id } = useParams()
 
@@ -45,28 +45,26 @@ const AreaPokemons = () => {
     }
 
     return (
-        <>
-            <ContainerBody>
-                <Center>
-                    <Heading className="mb-10" as="h1">Enemy</Heading>
-                </Center>
-                <Chosen>
-                    <h2 className="font-bold text-xl mb-2 text-center">Sang Terpilih</h2>
-                    <Image size="big" src={img} />
-                    <NameP nama={nama} />
-                </Chosen>
-                <PokemonList>
-                    {data.map((poke, idx) => {
-                        return (
-                            <PokemonOthers onClick={() => changes(poke.name, poke.imageUrl)} key={idx}>
-                                <NameP nama={poke.name} />
-                                <Image src={poke.imageUrl} />
-                            </PokemonOthers>
-                        )
-                    })}
-                </PokemonList>
-            </ContainerBody>
-        </>
+        <ContainerBody>
+            <Center>
+                <Heading className="mb-10" as="h1">Enemy</Heading>
+            </Center>
+            <Chosen>
+                <h2 className="font-bold text-xl mb-2 text-center">Sang Terpilih</h2>
+                <Image size="big" src={img} />
+                <NameP nama={nama} />
+            </Chosen>
+            <PokemonList>
+                {data.map((poke, idx) => {
+                    return (
+                        <PokemonOthers onClick={() => changes(poke.name, poke.imageUrl)} key={idx}>
+                            <NameP nama={poke.name} />
+                            <Image src={poke.imageUrl} />
+                        </PokemonOthers>
+                    )
+                })}
+            </PokemonList>
+        </ContainerBody>
     )
 }
 

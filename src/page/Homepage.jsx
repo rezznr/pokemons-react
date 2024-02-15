@@ -2,11 +2,14 @@ import Chosen from "../component/Chosen.jsx";
 import PokemonList from "../component/PokemonList";
 import { ContainerBody, PokemonOthers, Image, NameP } from "../component/Others"
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Pages = () => {
-  const [nama, setNama] = useState("Nama")
-  const [img, setImg] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg")
+  const [nama, setNama] = useState("Pokemon Name")
+  const [img, setImg] = useState("/images/wheresPokemon.png")
   const [data, setData] = useState([])
+  const token = localStorage.getItem('myToken')
+  const navigate = useNavigate()
 
   const pokemonFetch = async () => {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon")
@@ -32,12 +35,18 @@ const Pages = () => {
   }, [])
 
   const changes = (nama, img) => {
-    setNama(nama)
-    setImg(img)
-    localStorage.setItem("my-pokemon", JSON.stringify({
-      name: nama,
-      image: img
-    }));
+    if (token) {
+      setNama(nama)
+      setImg(img)
+      localStorage.setItem("my-pokemon", JSON.stringify({
+        name: nama,
+        image: img
+      }));
+    }
+    if (!token) {
+      alert('You need to Login First')
+      navigate('/login')
+    }
   }
 
   return (
@@ -50,16 +59,18 @@ const Pages = () => {
             <NameP nama={nama} />
           </Chosen>
         </div>
-        <PokemonList>
-          {data.map((poke, idx) => {
-            return (
-              <PokemonOthers onClick={() => changes(poke.name, poke.imageUrl)} key={idx}>
-                <NameP nama={poke.name} />
-                <Image src={poke.imageUrl} />
-              </PokemonOthers>
-            )
-          })}
-        </PokemonList>
+        {data === 0 ? <h2>Loading...</h2> :
+          <PokemonList>
+            {data.map((poke, idx) => {
+              return (
+                <PokemonOthers onClick={() => changes(poke.name, poke.imageUrl)} key={idx}>
+                  <NameP nama={poke.name} />
+                  <Image src={poke.imageUrl} />
+                </PokemonOthers>
+              )
+            })}
+          </PokemonList>
+        }
       </div>
     </ContainerBody>
   );
