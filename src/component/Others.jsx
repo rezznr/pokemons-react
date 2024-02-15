@@ -24,7 +24,9 @@ export const Image = ({ src, size }) => {
     <img
       src={src}
       alt="img"
-      className={`my-4 mx-auto ${size === "big" ? "h-64 w-64" : "h-32"}`}
+      className={`my-4 mx-auto hover:scale-125 ${
+        size === "big" ? "h-32" : "h-32"
+      }`}
     />
   );
 };
