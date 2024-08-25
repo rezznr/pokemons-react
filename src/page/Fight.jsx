@@ -1,56 +1,49 @@
 import { useState, useEffect } from "react";
-import { ContainerBody, NameP, Image } from "../component/Others";
-
+import { ContainerBody, NameP, Image } from "../components/Others";
 
 const Fight = () => {
-    const [myPokemon, setMyPokemon] = useState(null)
-    const [enemyPokemon, setEnemyPokemon] = useState(null)
+  const [myPokemon, setMyPokemon] = useState(null);
+  const [enemyPokemon, setEnemyPokemon] = useState(null);
 
-    const getMyPokemon = () => {
-        const item = localStorage.getItem("my-pokemon")
-        setMyPokemon(JSON.parse(item))
-    }
-    const getEnemyPokemon = () => {
-        const item = localStorage.getItem("enemy-pokemon")
-        setEnemyPokemon(JSON.parse(item))
-    }
+  const getMyPokemon = () => {
+    const item = localStorage.getItem("my-pokemon");
+    setMyPokemon(JSON.parse(item));
+  };
+  const getEnemyPokemon = () => {
+    const item = localStorage.getItem("enemy-pokemon");
+    setEnemyPokemon(JSON.parse(item));
+  };
 
-    useEffect(() => {
-        getEnemyPokemon()
-        getMyPokemon()
-    }, [])
+  useEffect(() => {
+    getEnemyPokemon();
+    getMyPokemon();
+  }, []);
 
-    return (
-        <ContainerBody>
-            <div className="flex justify-between my-32 mx-20">
-                {myPokemon ?
-                    <div>
-                        <Image src={myPokemon.image} size="big" alt="Your Pokemon" />
-                        <NameP nama={myPokemon.name} />
-                    </div>
-                    : null}
+  return (
+    <ContainerBody>
+      <div className="flex justify-between my-32 mx-20">
+        {myPokemon ? (
+          <div>
+            <Image src={myPokemon.image} size="big" alt="Your Pokemon" />
+            <NameP nama={myPokemon.name} />
+          </div>
+        ) : null}
 
-                <Image src={"https://www.pngmart.com/files/2/Pokeball-PNG-Photos.png"} size="big" />
+        <Image
+          src={"https://www.pngmart.com/files/2/Pokeball-PNG-Photos.png"}
+          size="big"
+        />
 
-                {enemyPokemon ?
-                    <div>
-                        <Image src={enemyPokemon.image} size="big" alt="Enemy Pokemon" />
-                        <NameP nama={enemyPokemon.name} />
-                    </div>
-                    : null
-                }
-            </div>
-        </ContainerBody>
-    )
-
-
-}
-
-
-
-
-
-
+        {enemyPokemon ? (
+          <div>
+            <Image src={enemyPokemon.image} size="big" alt="Enemy Pokemon" />
+            <NameP nama={enemyPokemon.name} />
+          </div>
+        ) : null}
+      </div>
+    </ContainerBody>
+  );
+};
 
 // import { ContainerBody } from "../component/Others";
 // import { Link } from "react-router-dom";
@@ -257,11 +250,9 @@ const Fight = () => {
 
 // // export default Fight;
 
-
 // // const Fight = () => {
 // //     const myPokemon = localStorage.getItem("my-pokemon")
 // //     const enemyPokemon = localStorage.getItem("enemy-pokemon")
-
 
 // //     return (
 // //         <>
