@@ -53,10 +53,10 @@ const AreaPokemons = () => {
 
   return (
     <ContainerBody>
-      <div className="flex gap-10">
+      <div className="flex flex-col gap-10 md:flex-row">
         <Chosen>
           <h2 className="mb-2 text-xl font-bold text-center">Sang Terpilih</h2>
-          <Image size="big" src={img} />
+          <Image src={img} />
           <NameP nama={nama} />
         </Chosen>
         <PokemonList>

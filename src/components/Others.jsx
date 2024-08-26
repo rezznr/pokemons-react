@@ -39,7 +39,7 @@ export const PokemonOthers = ({ children, onClick }) => (
 export const ContainerBody = ({ children }) => (
   <div className="bg-gradient-to-tr from-blue-50 to-green-100">
     <NavBar />
-    <div className="flex items-center justify-center py-8">
+    <div className="flex items-center justify-center py-8 pt-20">
       {children}
     </div>
   </div>
