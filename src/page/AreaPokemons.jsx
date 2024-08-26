@@ -8,11 +8,11 @@ import {
 } from "../components/Others.jsx";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Heading, Center } from "@chakra-ui/react";
 
 const AreaPokemons = () => {
-  const [nama, setNama] = useState("Enemy Pokemon");
-  const [img, setImg] = useState("/images/wheresPokemon.png");
+  const storedPokemon = JSON.parse(localStorage.getItem('enemy-pokemon')) || {};
+  const [nama, setNama] = useState(storedPokemon.name || 'Enemy Pokemon');
+  const [img, setImg] = useState(storedPokemon.image || '/images/wheresPokemon.png');
   const [data, setData] = useState([]);
   const { id } = useParams();
 
@@ -53,29 +53,26 @@ const AreaPokemons = () => {
 
   return (
     <ContainerBody>
-      <Center>
-        <Heading className="mb-10" as="h1">
-          Enemy
-        </Heading>
-      </Center>
-      <Chosen>
-        <h2 className="font-bold text-xl mb-2 text-center">Sang Terpilih</h2>
-        <Image size="big" src={img} />
-        <NameP nama={nama} />
-      </Chosen>
-      <PokemonList>
-        {data.map((poke, idx) => {
-          return (
-            <PokemonOthers
-              onClick={() => changes(poke.name, poke.imageUrl)}
-              key={idx}
-            >
-              <NameP nama={poke.name} />
-              <Image src={poke.imageUrl} />
-            </PokemonOthers>
-          );
-        })}
-      </PokemonList>
+      <div className="flex gap-10">
+        <Chosen>
+          <h2 className="mb-2 text-xl font-bold text-center">Sang Terpilih</h2>
+          <Image size="big" src={img} />
+          <NameP nama={nama} />
+        </Chosen>
+        <PokemonList>
+          {data.map((poke, idx) => {
+            return (
+              <PokemonOthers
+                onClick={() => changes(poke.name, poke.imageUrl)}
+                key={idx}
+              >
+                <NameP nama={poke.name} />
+                <Image src={poke.imageUrl} />
+              </PokemonOthers>
+            );
+          })}
+        </PokemonList>
+      </div>
     </ContainerBody>
   );
 };

@@ -7,7 +7,6 @@ import {
   ButtonLocation,
   NameP,
 } from "../components/Others";
-import { Heading, Center } from "@chakra-ui/react";
 
 const Location = () => {
   const [data, setData] = useState([]);
@@ -60,19 +59,19 @@ const Location = () => {
 
   return (
     <ContainerBody>
-      <Center>
-        <Heading>All Location Areas</Heading>
-      </Center>
-      <PokemonList>
-        {data.map((el, idx) => (
-          <PokemonOthers key={idx}>
-            <NameP nama={el.name} />
-            <Link to={`/location/${idx + 1}`}>
-              <ButtonLocation />
-            </Link>
-          </PokemonOthers>
-        ))}
-      </PokemonList>
+      <div className="flex flex-col items-center justify-center gap-7">
+        <h2 className="text-4xl font-bold">All Location Areas</h2>
+        <PokemonList>
+          {data.map((el, idx) => (
+            <PokemonOthers key={idx}>
+              <NameP nama={el.name.replace(/-/g, " ")} />
+              <Link to={`/location/${idx + 1}`}>
+                <ButtonLocation />
+              </Link>
+            </PokemonOthers>
+          ))}
+        </PokemonList>
+      </div>
     </ContainerBody>
   );
 };

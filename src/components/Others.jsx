@@ -17,7 +17,7 @@ export const Image = ({ src }) => (
   <img
     src={src}
     alt="img"
-    className={`mx-auto h-32 w-32`}
+    className={`px-5 py-8 h-60 w-60`}
   />
 );
 
@@ -29,7 +29,7 @@ export const NameP = ({ nama }) => (
 
 export const PokemonOthers = ({ children, onClick }) => (
   <div
-    className="max-w-sm p-4 overflow-hidden duration-500 ease-in-out transform rounded shadow-lg cursor-pointer hover:scale-110"
+    className="max-w-2xl p-4 overflow-hidden duration-500 ease-in-out transform rounded shadow-lg cursor-pointer hover:scale-110"
     onClick={onClick}
   >
     {children}
@@ -37,7 +37,7 @@ export const PokemonOthers = ({ children, onClick }) => (
 );
 
 export const ContainerBody = ({ children }) => (
-  <div className=" bg-gradient-to-tr from-blue-50 to-green-100">
+  <div className="bg-gradient-to-tr from-blue-50 to-green-100">
     <NavBar />
     <div className="flex items-center justify-center py-8">
       {children}

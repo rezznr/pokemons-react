@@ -5,8 +5,10 @@ import PokemonList from '../components/PokemonList.jsx';
 import { ContainerBody, PokemonOthers, Image, NameP } from '../components/Others.jsx';
 
 const Pages = () => {
-  const [name, setName] = useState('Pokemon Name');
-  const [img, setImg] = useState('/images/wheresPokemon.png');
+  // Retrieve stored Pokémon data from localStorage on component mount
+  const storedPokemon = JSON.parse(localStorage.getItem('my-pokemon')) || {};
+  const [name, setName] = useState(storedPokemon.name || 'Pokemon Name');
+  const [img, setImg] = useState(storedPokemon.image || '/images/wheresPokemon.png');
   const [data, setData] = useState([]);
   const token = localStorage.getItem('myToken');
   const navigate = useNavigate();
@@ -40,10 +42,7 @@ const Pages = () => {
     if (token) {
       setName(name);
       setImg(img);
-      localStorage.setItem(
-        'my-pokemon',
-        JSON.stringify({ name, image: img })
-      );
+      localStorage.setItem('my-pokemon', JSON.stringify({ name, image: img }));
     } else {
       alert('You need to Login First');
       navigate('/login');
@@ -51,36 +50,32 @@ const Pages = () => {
   };
 
   return (
-    <div>
-      <ContainerBody>
-        <div className="flex gap-5">
-          <div className="relative">
-            <Chosen>
-              <h2 className="mb-2 text-xl font-bold text-center">
-                Sang Terpilih
-              </h2>
-              <Image src={img} />
-              <NameP nama={name} />
-            </Chosen>
-          </div>
-          {data.length === 0 ? (
-            <h2>Loading...</h2>
-          ) : (
-            <PokemonList>
-              {data.map((poke, idx) => (
-                <PokemonOthers
-                  onClick={() => handleChange(poke.name, poke.imageUrl)}
-                  key={idx}
-                >
-                  <NameP nama={poke.name} />
-                  <Image src={poke.imageUrl} />
-                </PokemonOthers>
-              ))}
-            </PokemonList>
-          )}
-        </div>
-      </ContainerBody>
-    </div>
+    <ContainerBody>
+      <div className="flex flex-col gap-10 md:flex-row">
+        <Chosen>
+          <h2 className="mb-2 text-xl font-bold text-center">
+            Sang Terpilih
+          </h2>
+          <Image src={img} alt={name} />
+          <NameP nama={name} />
+        </Chosen>
+        {data.length === 0 ? (
+          <h2>Loading...</h2>
+        ) : (
+          <PokemonList>
+            {data.map((poke, idx) => (
+              <PokemonOthers
+                onClick={() => handleChange(poke.name, poke.imageUrl)}
+                key={idx}
+              >
+                <NameP nama={poke.name} />
+                <Image src={poke.imageUrl} alt={poke.name} />
+              </PokemonOthers>
+            ))}
+          </PokemonList>
+        )}
+      </div>
+    </ContainerBody>
   );
 };
 

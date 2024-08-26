@@ -34,7 +34,7 @@ const NavBar = () => {
     <nav className="relative flex flex-row items-center justify-center mb-8">
       <Link to="/">
         <img
-          src="images/pokemon.png"
+          src="/images/pokemon.png"
           alt="Pokemon Logo"
           width={170}
           className="ml-10 duration-200 ease-in-out scale-100 hover:scale-110 "
