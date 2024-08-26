@@ -85,14 +85,14 @@ const NavBar = () => {
 
         {/* Links for Desktop and Mobile */}
         <ul
-          className={`absolute mt-14 top-16 left-0 right-0 p-5 bg-blue-50  shadow-md rounded-lg md:relative md:top-0 md:left-auto md:right-auto md:bg-transparent md:flex md:p-0 md:shadow-none md:rounded-none ${isMenuOpen ? "block transition transform ease-in" : "hidden"
-            } md:flex items-center justify-center w-full md:gap-6`}
+          className={`absolute top-16 left-0 right-0 p-5 bg-blue-50 shadow-md rounded-lg items-center justify-center w-full md:relative md:top-0 md:left-auto md:right-auto md:bg-transparent md:p-0 md:shadow-none md:rounded-none md:flex md:gap-6 ${isMenuOpen ? "block mt-16" : "hidden"
+            }`}
         >
           {list.map((item, index) => (
             <li key={index} className="text-center md:mx-4">
               <Link
                 to={item.path}
-                className="relative inline-block text-xl font-bold text-transparent transition transform scale-100 bg-clip-text bg-gradient-to-r from-blue-400 to-green-400 hover:scale-110 active:text-blue-400"
+                className="relative inline-block text-xl font-bold text-transparent transition transform scale-100 bg-clip-text bg-gradient-to-r from-blue-400 to-green-400 hover:scale-110 active:text-blue-400 md:text-3xl"
                 onClick={() => setIsMenuOpen(false)} // close menu on click
               >
                 {item.name}
@@ -100,6 +100,7 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
+
 
         {/* Login/Logout Button for Desktop */}
         <div className="items-center hidden md:flex">
