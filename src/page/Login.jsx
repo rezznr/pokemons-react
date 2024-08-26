@@ -1,67 +1,74 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../firebase";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const handleUsername = (event) => {
-    event.preventDefault();
-    setUsername(event.target.value);
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
   };
+
   const handlePassword = (event) => {
-    event.preventDefault();
     setPassword(event.target.value);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(username);
-    console.log(password);
-    const data = {
-      username: username,
-      password: password,
-    };
-    fetch("https://kobarsept.com/api/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        const token = data.token;
-        localStorage.setItem("myToken", token);
-        localStorage.setItem("username", username);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        localStorage.setItem("myToken", user.accessToken);
+        localStorage.setItem("username", user.email);
         navigate("/");
+      })
+      .catch((error) => {
+        setError("Failed to log in. Please check your credentials.");
+      });
+  };
+
+  // Function to handle Google Login
+  const handleGoogleLogin = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        localStorage.setItem("myToken", user.accessToken);
+        localStorage.setItem("username", user.displayName);
+        navigate("/");
+      })
+      .catch((error) => {
+        setError("Failed to log in with Google. Please try again.");
       });
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-cyan-100">
-      <div className="p-20 border rounded-lg shadow-xl w-97 bg-indigo-50">
-        <form onSubmit={handleSubmit}>
-          <h1 className="text-4xl font-bold text-center text-black mb-7">
+      <div className="flex flex-col items-center justify-center p-20 border rounded-lg shadow-xl w-97 bg-indigo-50">
+        <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
+          <h1 className="mb-5 text-4xl font-bold text-center text-black">
             Login
           </h1>
+          {error && <p className="mb-4 text-center text-red-500">{error}</p>}
           <input
-            className="p-4 rounded-md shadow-md mb-7 bg-slate-50"
-            placeholder="Username"
-            type="text"
-            id="fname"
-            name="fname"
-            onChange={handleUsername}
-            value={username}
-            autoComplete="off"
+            className="p-4 rounded-md shadow-md bg-slate-50"
+            placeholder="Email"
+            type="email"
+            onChange={handleEmail}
+            value={email}
           />
           <br />
           <input
-            className="p-4 rounded-md shadow-md mb-7 bg-slate-50"
+            className="p-4 rounded-md shadow-md bg-slate-50"
             placeholder="Password"
             type="password"
-            id="lname"
-            name="lname"
             onChange={handlePassword}
             value={password}
           />
@@ -69,10 +76,19 @@ const Login = () => {
           <input
             className="submit-btn"
             type="submit"
-            id="fsubmit"
-            name="fsubmit"
+            value="Masuk"
           />
         </form>
+        <div className="mt-8 text-center">
+          <p>----------- or -----------</p>
+          <button
+            className="flex items-center justify-center gap-4 px-4 py-5 mt-4 font-bold transition duration-75 transform rounded-lg shadow-md bg-slate-200 hover:scale-105 active:scale-100"
+            onClick={handleGoogleLogin}
+          >
+            Login with Google
+            <FcGoogle />
+          </button>
+        </div>
       </div>
     </div>
   );
