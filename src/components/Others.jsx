@@ -17,7 +17,7 @@ export const Image = ({ src }) => (
   <img
     src={src}
     alt="img"
-    className={`px-5 py-8 h-60 w-60`}
+    className={`px-5 py-8 h-60 w-60 text-center`}
   />
 );
 
@@ -36,10 +36,10 @@ export const PokemonOthers = ({ children, onClick }) => (
   </div>
 );
 
-export const ContainerBody = ({ children }) => (
+export const ContainerBody = ({ children, flex }) => (
   <div className="bg-gradient-to-tr from-blue-50 to-green-100">
     <NavBar />
-    <div className="flex items-center justify-center py-8 pt-20">
+    <div className={`flex items-center justify-center py-8 pt-20 ${flex === 'col' ? "flex-col" : "flex-row"}`}>
       {children}
     </div>
   </div>
