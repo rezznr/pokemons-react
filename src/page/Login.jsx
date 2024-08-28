@@ -28,8 +28,8 @@ const Login = () => {
         localStorage.setItem("username", user.email);
         navigate("/");
       })
-      .catch((error) => {
-        setError("Failed to log in. Please check your credentials.");
+      .catch((err) => {
+        setError("Password salah/Akun belum terdaftar");
       });
   };
 
@@ -44,8 +44,8 @@ const Login = () => {
         localStorage.setItem("username", user.displayName);
         navigate("/");
       })
-      .catch((error) => {
-        setError("Failed to log in with Google. Please try again.");
+      .catch((err) => {
+        setError(err.message);
       });
   };
 
@@ -63,6 +63,7 @@ const Login = () => {
             type="email"
             onChange={handleEmail}
             value={email}
+            required
           />
           <br />
           <input
@@ -71,6 +72,7 @@ const Login = () => {
             type="password"
             onChange={handlePassword}
             value={password}
+            required
           />
           <br />
           <input
@@ -89,6 +91,7 @@ const Login = () => {
             <FcGoogle />
           </button>
         </div>
+        <p onClick={() => navigate('/')} className="mt-5 text-xl text-blue-400 underline cursor-pointer hover:text-blue-600">Back to Home</p>
       </div>
     </div>
   );
